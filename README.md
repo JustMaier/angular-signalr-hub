@@ -50,6 +50,12 @@ angular.module('app',['SignalR'])
 }]);
 ```
 
+##Demo
+
+[A simple demo using OData, Signalr, and Angular](https://github.com/JustMaier/signalrgrid)
+
+It's an adaption of [turanuk's great SignalR demo with Knockout](https://github.com/turanuk/signalrgrid).
+
 ##Notes
 
 * I would recommend creating a factory or service around the Hub so that you have an easy to use "model handler" that can include SignalR and Web API calls and be easily pulled into any controller
