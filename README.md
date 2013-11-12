@@ -5,9 +5,13 @@ A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions
 
 ##Installation
 
+####Bower
 `bower install angular-signalr-hub`
 
-Or manually by downloading and adding the following to your html:
+####Nuget
+`install-package AngularJs.SignalR.Hub`
+
+####Manually
 
 `<script type="text/javascript" src="js/signalr-hub.js"></script>`
 
