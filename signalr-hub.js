@@ -1,11 +1,15 @@
 angular.module('SignalR', [])
 .constant('$', $)
 .factory('Hub', ['$', function ($) {
+	//This will allow same connection to be used for all Hubs
+	//It also keeps connection as singleton.
+	var globalConnection = $.hubConnection();
 	return function (hubName, listeners, methods) {
 		var Hub = this;
-		Hub.connection = $.hubConnection();
+		Hub.connection = globalConnection;
 		Hub.proxy = Hub.connection.createHubProxy(hubName);
-		Hub.connection.start();
+		//Adding additional property of promise allows to access it in rest of the application.
+		Hub.promise = Hub.connection.start();		
 		Hub.on = function (event, fn) {
 			Hub.proxy.on(event, fn);
 		};
