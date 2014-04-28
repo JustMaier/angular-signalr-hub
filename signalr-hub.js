@@ -8,8 +8,6 @@ angular.module('SignalR', [])
 		var Hub = this;
 		Hub.connection = globalConnection;
 		Hub.proxy = Hub.connection.createHubProxy(hubName);
-		//Adding additional property of promise allows to access it in rest of the application.
-		Hub.promise = Hub.connection.start();		
 		Hub.on = function (event, fn) {
 			Hub.proxy.on(event, fn);
 		};
@@ -31,6 +29,8 @@ angular.module('SignalR', [])
 				};
 			});
 		}
+		//Adding additional property of promise allows to access it in rest of the application.
+		Hub.promise = Hub.connection.start();		
 		return Hub;
 	};
 }]);
