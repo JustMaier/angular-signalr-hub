@@ -12,7 +12,7 @@ angular.module('SignalR', [])
 			Hub.proxy.on(event, fn);
 		};
 		Hub.invoke = function (method, args) {
-			Hub.proxy.invoke.apply(Hub.proxy, arguments)
+			return Hub.proxy.invoke.apply(Hub.proxy, arguments)
 		};
 
 		if (listeners) {
@@ -25,7 +25,7 @@ angular.module('SignalR', [])
 				Hub[method] = function () {
 					var args = $.makeArray(arguments);
 					args.unshift(method);
-					Hub.invoke.apply(Hub, args);
+					return Hub.invoke.apply(Hub, args);
 				};
 			});
 		}
