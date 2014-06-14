@@ -26,6 +26,9 @@ angular.module('SignalR', [])
       Hub.invoke = function (method, args) {
         return Hub.proxy.invoke.apply(Hub.proxy, arguments)
       };
+      Hub.disconnect = function () {
+        Hub.connection.stop();
+      };
 
       if (listeners) {
         angular.forEach(listeners, function (fn, event) {
