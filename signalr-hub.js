@@ -20,6 +20,7 @@ angular.module('SignalR', [])
       }
       Hub.connection = globalConnection;
       Hub.proxy = Hub.connection.createHubProxy(hubName);
+
       Hub.on = function (event, fn) {
         Hub.proxy.on(event, fn);
       };
@@ -28,6 +29,9 @@ angular.module('SignalR', [])
       };
       Hub.disconnect = function () {
         Hub.connection.stop();
+      };
+      Hub.connect = function(){
+        Hub.connection.start();
       };
 
       if (listeners) {
