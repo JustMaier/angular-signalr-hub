@@ -53,7 +53,18 @@ angular.module('app',['SignalR'])
 	//Helper functions and additional variables removed to keep this short...
 }]);
 ```
+##Options
 
+###listeners
+client side callbacks
+
+###methods
+a string array of server side methods which the client can call
+###rootPath
+Sets the root path for the signalR web service
+
+###queryParams
+Object representing additional query params to be sent on connection
 ##Demo
 
 [A simple demo using OData, Signalr, and Angular](https://github.com/JustMaier/signalrgrid)

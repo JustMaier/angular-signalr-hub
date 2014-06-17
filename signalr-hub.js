@@ -5,18 +5,18 @@ angular.module('SignalR', [])
     //It also keeps connection as singleton.
     var globalConnection = null;
 
-    var initGlobalConnection = function (rootPath) {
-      if (rootPath) {
-        globalConnection = $.hubConnection(rootPath, {userDefaultPath: false});
+    var initGlobalConnection = function (options) {
+      if (options && options.rootPath) {
+        globalConnection = $.hubConnection(options.rootPath, {userDefaultPath: false});
       } else {
         globalConnection = $.hubConnection();
       }
     };
 
-    return function (hubName, listeners, methods, rootPath) {
+    return function (hubName, options) {
       var Hub = this;
       if (globalConnection === null) {
-        initGlobalConnection(rootPath);
+        initGlobalConnection(options);
       }
       Hub.connection = globalConnection;
       Hub.proxy = Hub.connection.createHubProxy(hubName);
@@ -34,19 +34,22 @@ angular.module('SignalR', [])
         Hub.connection.start();
       };
 
-      if (listeners) {
-        angular.forEach(listeners, function (fn, event) {
+      if (options && options.listeners) {
+        angular.forEach(options.listeners, function (fn, event) {
           Hub.on(event, fn);
         });
       }
-      if (methods) {
-        angular.forEach(methods, function (method) {
+      if (options && options.methods) {
+        angular.forEach(options.methods, function (method) {
           Hub[method] = function () {
             var args = $.makeArray(arguments);
             args.unshift(method);
             return Hub.invoke.apply(Hub, args);
           };
         });
+      }
+      if(options && options.queryParams){
+        Hub.connection.qs = options.queryParams;
       }
       //Adding additional property of promise allows to access it in rest of the application.
       Hub.promise = Hub.connection.start();
