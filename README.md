@@ -19,38 +19,74 @@ A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions
 
 1. Include the `signalr-hub.js` script provided by this component into your app
 2. add `SignalR` as a module dependency to your app
+3. Call new Hub with two parameters
+	a. HubName
+	b. Options
+
 
 ####Javascript
-```javascript
+  var hub = new Hub('AlertHub', {
+          listeners: {
+            //Client methods
+            'globalAlert': function (message) {
+              alert(message);
+              $rootScope.$apply();
+            }
+          },
+          methods: [],
+          rootPath: '/api',
+          queryParams: {
+            'token': a.getToken()
+          }
+        }
+      );
+
+
+
+
+```
 angular.module('app',['SignalR'])
 .factory('Employees',['$rootScope','Hub', function($rootScope, Hub){
-	var Employees = this;
 
+	//declaring the hub connection
 	var hub = new Hub('employee', {
-		//Client methods
-		'lockEmployee': function (id) {
-			var employee = find(id);
-			employee.Locked = true;
-			$rootScope.$apply();
+	
+		//client side methods
+		listeners:{
+			'lockEmployee': function (id) {
+				var employee = find(id);
+				employee.Locked = true;
+				$rootScope.$apply();
+			},
+			'unlockEmployee': function (id) {
+				var employee = find(id);
+				employee.Locked = false;
+				$rootScope.$apply();
+			}
 		},
-		'unlockEmployee': function (id) {
-			var employee = find(id);
-			employee.Locked = false;
-			$rootScope.$apply();
+		
+		//server side methods
+		methods: ['lock','unlock'],
+		
+		//query params sent on initial connection
+		queryParams:{
+			'token': 'exampletoken'
 		}
+		
 	}, 
-		//Server method stubs for ease of access
-		['lock', 'unlock']
 	);
 
-	Employees.edit = function (employee) {
+	var edit = function (employee) {
 		hub.lock(employee.Id); //Calling a server method
 	};
-	Employees.done = function (employee) {
+	var done = function (employee) {
 		hub.unlock(employee.Id); //Calling a server method
 	}
 
-	//Helper functions and additional variables removed to keep this short...
+	return {
+		editEmployee: edit,
+		doneWithEmployee: done
+	};
 }]);
 ```
 ##Options
