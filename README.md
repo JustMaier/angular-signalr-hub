@@ -20,9 +20,8 @@ A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions
 1. Include the `signalr-hub.js` script provided by this component into your app
 2. add `SignalR` as a module dependency to your app
 3. Call new Hub with two parameters
-	a. HubName
-	b. Options
-
+	
+			var hub = new Hub('hubname',options);
 
 ####Javascript
   var hub = new Hub('AlertHub', {
@@ -73,8 +72,7 @@ angular.module('app',['SignalR'])
 			'token': 'exampletoken'
 		}
 		
-	}, 
-	);
+	});
 
 	var edit = function (employee) {
 		hub.lock(employee.Id); //Calling a server method
