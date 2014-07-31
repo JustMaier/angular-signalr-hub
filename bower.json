@@ -5,7 +5,7 @@
 		"type": "git",
 		"url": "git@github.com:JustMaier/angular-signalr-hub.git"
 	},
-	"main": "signalr-hub.min.js",
+	"main": "signalr-hub.js",
 	"dependencies": {
 		"angular": "*",
 		"jquery": "*",
