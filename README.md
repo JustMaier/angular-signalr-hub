@@ -70,6 +70,11 @@ angular.module('app',['SignalR'])
 		//query params sent on initial connection
 		queryParams:{
 			'token': 'exampletoken'
+		},
+
+		//handle connection error
+		errorHandler: function(error){
+			console.error(error);
 		}
 		
 	});
@@ -89,16 +94,12 @@ angular.module('app',['SignalR'])
 ```
 ##Options
 
-###listeners
-client side callbacks
+* `listeners` client side callbacks
+* `methods`  a string array of server side methods which the client can call
+* `rootPath` sets the root path for the signalR web service
+* `queryParams` object representing additional query params to be sent on connection
+* `errorHandler` function(error) to handle hub connection errors
 
-###methods
-a string array of server side methods which the client can call
-###rootPath
-Sets the root path for the signalR web service
-
-###queryParams
-Object representing additional query params to be sent on connection
 ##Demo
 
 [A simple demo using OData, Signalr, and Angular](https://github.com/JustMaier/signalrgrid)
