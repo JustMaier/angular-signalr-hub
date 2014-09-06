@@ -11,6 +11,8 @@ angular.module('SignalR', [])
 		} else {
 			globalConnection = $.hubConnection();
 		}
+		
+		globalConnection.logging = (options && options.logging ? true : false);
 	};
 
 	return function (hubName, options) {
