@@ -99,6 +99,7 @@ angular.module('app',['SignalR'])
 * `rootPath` sets the root path for the signalR web service
 * `queryParams` object representing additional query params to be sent on connection
 * `errorHandler` function(error) to handle hub connection errors
+* `logging` enable/disable logging
 
 ##Demo
 
