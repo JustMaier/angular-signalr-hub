@@ -7,7 +7,7 @@ angular.module('SignalR', [])
 
 	var initGlobalConnection = function (options) {
 		if (options && options.rootPath) {
-			globalConnection = $.hubConnection(options.rootPath, { userDefaultPath: false });
+			globalConnection = $.hubConnection(options.rootPath, { useDefaultPath: false });
 		} else {
 			globalConnection = $.hubConnection();
 		}
