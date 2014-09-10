@@ -100,6 +100,7 @@ angular.module('app',['SignalR'])
 * `queryParams` object representing additional query params to be sent on connection
 * `errorHandler` function(error) to handle hub connection errors
 * `logging` enable/disable logging
+* `useSharedConnection` use a shared global connection or create a new one just for this hub, defaults to `true`
 
 ##Demo
 
