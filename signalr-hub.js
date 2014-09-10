@@ -15,7 +15,7 @@ angular.module('SignalR', [])
 
 		connection.logging = (options && options.logging ? true : false);
 		return connection;
-	};
+	}
 
 	function getConnection(options) {
 		var useSharedConnection = !(options && options.useSharedConnection === false);
