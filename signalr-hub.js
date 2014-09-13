@@ -5,22 +5,32 @@ angular.module('SignalR', [])
 	//It also keeps connection as singleton.
 	var globalConnection = null;
 
-	var initGlobalConnection = function (options) {
+	function initNewConnection(options) {
+		var connection = null;
 		if (options && options.rootPath) {
-			globalConnection = $.hubConnection(options.rootPath, { useDefaultPath: false });
+			connection = $.hubConnection(options.rootPath, { useDefaultPath: false });
 		} else {
-			globalConnection = $.hubConnection();
+			connection = $.hubConnection();
 		}
-		
-		globalConnection.logging = (options && options.logging ? true : false);
-	};
+
+		connection.logging = (options && options.logging ? true : false);
+		return connection;
+	}
+
+	function getConnection(options) {
+		var useSharedConnection = !(options && options.useSharedConnection === false);
+		if (useSharedConnection) {
+			return globalConnection === null ? globalConnection = initNewConnection(options) : globalConnection;
+		}
+		else {
+			return initNewConnection(options);
+		}
+	}
 
 	return function (hubName, options) {
 		var Hub = this;
-		if (globalConnection === null) {
-			initGlobalConnection(options);
-		}
-		Hub.connection = globalConnection;
+
+		Hub.connection = getConnection(options);
 		Hub.proxy = Hub.connection.createHubProxy(hubName);
 
 		Hub.on = function (event, fn) {
