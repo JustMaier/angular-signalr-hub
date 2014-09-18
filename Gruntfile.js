@@ -7,6 +7,16 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
 
+  var banner = '/**\n' +
+    ' * <%= pkg.name %>\n' +
+    ' * @version v<%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %>\n' +
+    ' * @link <%= pkg.homepage %>\n' +
+    ' * @author <%= pkg.author.name %> (<%= pkg.author.url %>)\n' +
+    ' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
+    ' */\n';
+
+
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
@@ -20,7 +30,7 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: banner
       },
       dist: {
         files: {
@@ -65,6 +75,7 @@ module.exports = function(grunt) {
 
   });
 
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');

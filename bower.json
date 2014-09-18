@@ -1,11 +1,11 @@
 {
   "name": "angular-signalr-hub",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "repository": {
     "type": "git",
     "url": "git@github.com:JustMaier/angular-signalr-hub.git"
   },
-  "main": "signalr-hub.js",
+  "main": "dist/angular-signalr-hub.min.js",
   "dependencies": {
     "angular": "*",
     "jquery": "*",
