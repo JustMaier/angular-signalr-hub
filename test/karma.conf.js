@@ -21,6 +21,8 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/jquery/dist/jquery.js',
       'bower_components/signalr/jquery.signalR.js',
+      //'test/jquery.network.mock.js',
+      //'test/test.utilities.js',
       'src/**/*.js',
       'test/spec/**/*.js',
     ],
@@ -40,7 +42,8 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS'
+      'PhantomJS', 
+      //'Chrome'
     ],
 
     // Continuous Integration mode
@@ -60,10 +63,16 @@ module.exports = function(config) {
     plugins: [
       'karma-jasmine',
       'karma-phantomjs-launcher',
-      'karma-coverage'
+      //'karma-chrome-launcher',
+      'karma-coverage',
+      'karma-htmlfile-reporter'
     ],
 
-    reporters: ['dots', 'coverage'],
+    htmlReporter: {
+      outputFile: 'test/units.html'
+    },
+
+    reporters: ['progress', 'html', 'coverage'],
 
     // Coverage reporter generates the coverage
     coverageReporter: {
