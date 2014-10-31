@@ -24,24 +24,6 @@ A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions
 			var hub = new Hub('hubname',options);
 
 ####Javascript
-  var hub = new Hub('AlertHub', {
-          listeners: {
-            //Client methods
-            'globalAlert': function (message) {
-              alert(message);
-              $rootScope.$apply();
-            }
-          },
-          methods: [],
-          rootPath: '/api',
-          queryParams: {
-            'token': a.getToken()
-          }
-        }
-      );
-
-
-
 
 ```
 angular.module('app',['SignalR'])
@@ -75,7 +57,10 @@ angular.module('app',['SignalR'])
 		//handle connection error
 		errorHandler: function(error){
 			console.error(error);
-		}
+		},
+		
+		//specify a non default root
+		//rootPath: '/api
 		
 	});
 
