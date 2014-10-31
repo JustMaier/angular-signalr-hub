@@ -1,14 +1,17 @@
 {
-	"name": "angular-signalr-hub",
-	"version": "1.3.0",
-	"repository":{
-		"type": "git",
-		"url": "git@github.com:JustMaier/angular-signalr-hub.git"
-	},
-	"main": "signalr-hub.js",
-	"dependencies": {
-		"angular": "*",
-		"jquery": "*",
-		"signalr": "*"
-	}
+  "name": "angular-signalr-hub",
+  "version": "1.4.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:JustMaier/angular-signalr-hub.git"
+  },
+  "main": "dist/angular-signalr-hub.min.js",
+  "dependencies": {
+    "angular": "*",
+    "jquery": "*",
+    "signalr": "*"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.25"
+  }
 }
