@@ -43,7 +43,7 @@ angular.module('SignalR', [])
 			Hub.connection.stop();
 		};
 		Hub.connect = function () {
-			Hub.connection.start();
+			return Hub.connection.start(options.transport ? { transport: options.transport } : null);
 		};
 
 		if (options && options.listeners) {
@@ -68,7 +68,7 @@ angular.module('SignalR', [])
 		}
 
 		//Adding additional property of promise allows to access it in rest of the application.
-		Hub.promise = Hub.connection.start();
+		Hub.promise = Hub.connect();
 		return Hub;
 	};
 }]);
