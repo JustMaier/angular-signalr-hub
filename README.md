@@ -86,6 +86,7 @@ angular.module('app',['SignalR'])
 * `errorHandler` function(error) to handle hub connection errors
 * `logging` enable/disable logging
 * `useSharedConnection` use a shared global connection or create a new one just for this hub, defaults to `true`
+* `transport` sets transport method (e.g ```'longPolling'``` or ```['webSockets', 'longPolling']```)
 
 ##Demo
 
