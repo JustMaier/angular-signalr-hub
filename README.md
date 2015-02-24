@@ -20,12 +20,14 @@ A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions
 1. Include the `signalr-hub.js` script provided by this component into your app
 2. add `SignalR` as a module dependency to your app
 3. Call new Hub with two parameters
-	
-			var hub = new Hub('hubname',options);
+
+```javascript
+var hub = new Hub('hubname',options);
+```
 
 ####Javascript
 
-```
+```javascript
 angular.module('app',['SignalR'])
 .factory('Employees',['$rootScope','Hub', '$timeout', function($rootScope, Hub, $timeout){
 
@@ -62,21 +64,21 @@ angular.module('app',['SignalR'])
 		//specify a non default root
 		//rootPath: '/api
 		
-            	hubDisconnected: function () {                
-                	if (hub.connection.lastError) {
-                    		hub.connection.start()
-                    		.done(function () {
-                        		if (hub.connection.state == 0)
-                            			$timeout(function () { //your code here }, 2000);
-                        		else{
-                            			//your code here
-                    			})
-                    		.fail(function (reason) {
-                        		console.log(reason);
-                		}
-                		);
-                	}
-            	}
+		hubDisconnected: function () {                
+			if (hub.connection.lastError) {
+					hub.connection.start()
+					.done(function () {
+						if (hub.connection.state == 0)
+								$timeout(function () { //your code here }, 2000);
+						else{
+								//your code here
+						})
+					.fail(function (reason) {
+						console.log(reason);
+				}
+				);
+			}
+		}
 	});
 
 	var edit = function (employee) {
