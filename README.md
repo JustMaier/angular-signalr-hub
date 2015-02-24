@@ -27,7 +27,7 @@ A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions
 
 ```
 angular.module('app',['SignalR'])
-.factory('Employees',['$rootScope','Hub', function($rootScope, Hub){
+.factory('Employees',['$rootScope','Hub', '$timeout', function($rootScope, Hub, $timeout){
 
 	//declaring the hub connection
 	var hub = new Hub('employee', {
@@ -62,6 +62,22 @@ angular.module('app',['SignalR'])
 		//specify a non default root
 		//rootPath: '/api
 		
+		,
+            	hubDisconnected: function () {                
+                	if (hub.connection.lastError) {
+                    		hub.connection.start()
+                    		.done(function () {
+                        		if (hub.connection.state == 0)
+                            			$timeout(function () { //your code here }, 2000);
+                        		else
+                            			//your code here
+                    			})
+                    		.fail(function (reason) {
+                        		console.log(reason);
+                		}
+                		);
+                	}
+            	}
 	});
 
 	var edit = function (employee) {
