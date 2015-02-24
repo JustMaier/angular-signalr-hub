@@ -62,7 +62,6 @@ angular.module('app',['SignalR'])
 		//specify a non default root
 		//rootPath: '/api
 		
-		,
             	hubDisconnected: function () {                
                 	if (hub.connection.lastError) {
                     		hub.connection.start()
