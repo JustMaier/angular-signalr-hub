@@ -68,7 +68,7 @@ angular.module('app',['SignalR'])
                     		.done(function () {
                         		if (hub.connection.state == 0)
                             			$timeout(function () { //your code here }, 2000);
-                        		else
+                        		else{
                             			//your code here
                     			})
                     		.fail(function (reason) {
