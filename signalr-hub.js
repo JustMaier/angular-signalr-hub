@@ -68,6 +68,12 @@ angular.module('SignalR', [])
 		if (options && options.errorHandler) {
 			Hub.connection.error(options.errorHandler);
 		}
+		//Allow for the user of the hub to easily implement actions upon disconnected.
+		//e.g. : Laptop/PC sleep and reopen, one might want to automatically reconnect 
+		//by using the disconnected event on the connection as the starting point.
+		if (options && options.hubDisconnected) {
+		    Hub.connection.disconnected(options.hubDisconnected);
+		}
 
 		//Adding additional property of promise allows to access it in rest of the application.
 		Hub.promise = Hub.connect();
