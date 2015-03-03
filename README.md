@@ -66,17 +66,19 @@ angular.module('app',['SignalR'])
 		
 		hubDisconnected: function () {                
 			if (hub.connection.lastError) {
-					hub.connection.start()
+                hub.connection.start()
 					.done(function () {
-						if (hub.connection.state == 0)
-								$timeout(function () { //your code here }, 2000);
-						else{
-								//your code here
-						})
+						if (hub.connection.state === 0) {
+						    $timeout(function () { 
+						        //your code here 
+						    }, 2000);
+						} else {
+						    //your code here
+						}
+                    })
 					.fail(function (reason) {
 						console.log(reason);
-				}
-				);
+				    });
 			}
 		}
 	});
