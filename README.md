@@ -114,6 +114,35 @@ angular.module('app',['SignalR'])
 
 It's an adaption of [turanuk's great SignalR demo with Knockout](https://github.com/turanuk/signalrgrid).
 
+##Simple Chat Demo
+
+This sample starts off with the [MVC-SignalR chat](http://www.asp.net/signalr/overview/getting-started/tutorial-getting-started-with-signalr-and-mvc) sample by Tim Teebken and Patrick Fletcher.
+
+This sample is then reworked (in a quick and dirty way) to show how to go about using the chathub from angular by using the angular-signalr-hub.
+
+Some extra NuGet packages are added to the project. (check out the packages.config file)
+An app folder was added for the angular app, in which the following was added:
+* a module (signalRChatApp)
+* a factory (ChatService) 
+* a controller (ChatController)
+* an html page 
+
+Modifications were made to the following files:
+* BundleConfig.cs
+* RouteConfig.cs
+* HomeController.cs
+* Global.asax.cs
+* Startup.cs
+* Index.cshtml
+
+In the app folder for the angular app, there is a ChatService which uses the angular-signalr-hub.
+The hub in this case is the ChatHub in this project.
+
+Download the full sample [here](http://1drv.ms/1K3EXpQ).
+
+The sample is provided as is. 
+There are soms issues with the way it is set up, but it does the trick in showing in showing how to use the angular-signalr-hub in an easy to reproduce app.
+
 ##Notes
 
 * I would recommend creating a factory or service around the Hub so that you have an easy to use "model handler" that can include SignalR and Web API calls and be easily pulled into any controller
