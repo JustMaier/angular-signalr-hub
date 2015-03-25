@@ -1,5 +1,5 @@
 angular.module('SignalR', [])
-.constant('$', $)
+.constant('$', window.jQuery)
 .factory('Hub', ['$', function ($) {
 	//This will allow same connection to be used for all Hubs
 	//It also keeps connection as singleton.
