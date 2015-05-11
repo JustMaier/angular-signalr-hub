@@ -1,6 +1,6 @@
 angular.module('SignalR', [])
 .constant('$', window.jQuery)
-.factory('Hub', ['$', function ($) {
+.factory('Hub', ['$','$scope','$q', function ($, $scope, $q) {
 	//This will allow same connection to be used for all Hubs
 	//It also keeps connection as singleton.
 	var globalConnections = [];
@@ -36,10 +36,14 @@ angular.module('SignalR', [])
 		Hub.proxy = Hub.connection.createHubProxy(hubName);
 
 		Hub.on = function (event, fn) {
-			Hub.proxy.on(event, fn);
+			Hub.proxy.on(event, function(){
+				$scope.$apply(fn);
+			});
 		};
 		Hub.invoke = function (method, args) {
-			return Hub.proxy.invoke.apply(Hub.proxy, arguments)
+			return $q(function(resolve,reject){
+				Hub.proxy.invoke.apply(Hub.proxy, arguments).done(resolve).fail(reject);
+			});
 		};
 		Hub.disconnect = function () {
 			Hub.connection.stop();
