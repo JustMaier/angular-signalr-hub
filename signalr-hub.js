@@ -74,6 +74,9 @@ angular.module('SignalR', [])
 		if (options && options.hubDisconnected) {
 		    Hub.connection.disconnected(options.hubDisconnected);
 		}
+		if (options && options.stateChanged) {
+		    Hub.connection.stateChanged(options.stateChanged);
+		}
 
 		//Adding additional property of promise allows to access it in rest of the application.
 		Hub.promise = Hub.connect();
