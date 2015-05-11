@@ -106,7 +106,7 @@ angular.module('app',['SignalR'])
 * `logging` enable/disable logging
 * `useSharedConnection` use a shared global connection or create a new one just for this hub, defaults to `true`
 * `transport` sets transport method (e.g ```'longPolling'``` or ```['webSockets', 'longPolling']```)
-* `hubDisconnected` function() to handle hub connection disconnected event
+* **DEPRECATED** `hubDisconnected` function() to handle hub connection disconnected event
 
 ##Demo
 
