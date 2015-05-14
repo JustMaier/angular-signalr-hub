@@ -64,23 +64,22 @@ angular.module('app',['SignalR'])
 		//specify a non default root
 		//rootPath: '/api
 		
-		hubDisconnected: function () {                
-			if (hub.connection.lastError) {
-                hub.connection.start()
-					.done(function () {
-						if (hub.connection.state === 0) {
-						    $timeout(function () { 
-						        //your code here 
-						    }, 2000);
-						} else {
-						    //your code here
-						}
-                    })
-					.fail(function (reason) {
-						console.log(reason);
-				    });
-			}
-		}
+        stateChanged: function(state){
+            switch (state.newState) {
+                case $.signalR.connectionState.connecting:
+                    //your code here
+                    break;
+                case $.signalR.connectionState.connected:
+                    //your code here
+                    break;
+                case $.signalR.connectionState.reconnecting:
+                    //your code here
+                    break;
+                case $.signalR.connectionState.disconnected:
+                    //your code here
+                    break;
+            }
+        }
 	});
 
 	var edit = function (employee) {
@@ -106,7 +105,8 @@ angular.module('app',['SignalR'])
 * `logging` enable/disable logging
 * `useSharedConnection` use a shared global connection or create a new one just for this hub, defaults to `true`
 * `transport` sets transport method (e.g ```'longPolling'``` or ```['webSockets', 'longPolling']```)
-* `hubDisconnected` function() to handle hub connection disconnected event
+* **DEPRECATED** `hubDisconnected` function() to handle hub connection disconnected event
+* `stateChanged` function() to handle hub connection state changed event
 
 ##Demo
 
