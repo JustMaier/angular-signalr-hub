@@ -1,6 +1,6 @@
 {
 	"name": "angular-signalr-hub",
-	"version": "1.4.1",
+	"version": "1.5.0",
 	"repository":{
 		"type": "git",
 		"url": "git@github.com:JustMaier/angular-signalr-hub.git"
