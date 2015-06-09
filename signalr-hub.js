@@ -13,6 +13,10 @@ angular.module('SignalR', [])
 			connection = $.hubConnection();
 		}
 
+		if (options && options.stateChanged) {
+		    connection.stateChanged(options.stateChanged);
+		}
+
 		connection.logging = (options && options.logging ? true : false);
 		return connection;
 	}
