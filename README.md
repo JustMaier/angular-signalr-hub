@@ -143,6 +143,20 @@ Download the full sample [here](http://1drv.ms/1K3EXpQ).
 The sample is provided as is. 
 There are soms issues with the way it is set up, but it does the trick in showing in showing how to use the angular-signalr-hub in an easy to reproduce app.
 
+##Multiple hubs
+
+There is something you have to take care about when using multiple hubs in an angular app : 
+
+Angular services are singletons, so they won't be instantiated before you need it. 
+
+If you use shared connection between your hubs (`useSharedConnection`), and if you have two services containing hubs, you can have a problem :
+
+The first service loaded will start the connection. Then when the second service will load, its hub won't be registered to the server SignalR (`OnConnected` method) if this service is instantiated after that the shared connection is `connected`. 
+(SignalR trace : SignalR: Client subscribed to hub 'hubname'.)
+The hub of the second service will be able to invoke server methods, but the server won't be able to invoke the client methods for this hub.
+
+To avoid that, you can put `useSharedConnection` to `false`.
+
 ##Notes
 
 * I would recommend creating a factory or service around the Hub so that you have an easy to use "model handler" that can include SignalR and Web API calls and be easily pulled into any controller
