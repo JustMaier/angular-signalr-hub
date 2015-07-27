@@ -11,6 +11,9 @@ A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions
 ####Nuget
 `install-package AngularJs.SignalR.Hub`
 
+####NPM
+`npm install angular-signalr-hub`
+
 ####Manually
 
 `<script type="text/javascript" src="js/signalr-hub.js"></script>`
