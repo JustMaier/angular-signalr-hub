@@ -1,5 +1,6 @@
 angular-signalr-hub
 =======================
+[![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard.svg)](http://definitelytyped.org)
 
 A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions, and methods that you're going to use.
 
