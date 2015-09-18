@@ -49,9 +49,12 @@ angular.module('SignalR', [])
 		};
 
 		if (options && options.listeners) {
-			angular.forEach(options.listeners, function (fn, event) {
-				Hub.on(event, fn);
-			});
+			Object.getOwnPropertyNames(options.listeners)
+			.filter(function (propName) {
+		        	return typeof options.listeners[propName] === 'function';})
+		        .forEach(function (propName) {
+		        	Hub.on(propName, options.listeners[propName]);
+		    	});
 		}
 		if (options && options.methods) {
 			angular.forEach(options.methods, function (method) {
