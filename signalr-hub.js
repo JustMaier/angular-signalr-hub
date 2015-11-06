@@ -32,6 +32,17 @@ angular.module('SignalR', [])
 	return function (hubName, options) {
 		var Hub = this;
 
+		function clientFunctionDecorator(func) {
+		    if (!!options.argsInterceptor) {
+		        return function () {
+		            options.argsInterceptor(arguments);
+		            return func.apply(options.listeners, arguments)
+		        }.bind(options.listeners);
+		    } else {
+		        return func;
+		    }
+		}
+
 		Hub.connection = getConnection(options);
 		Hub.proxy = Hub.connection.createHubProxy(hubName);
 
@@ -49,9 +60,12 @@ angular.module('SignalR', [])
 		};
 
 		if (options && options.listeners) {
-			angular.forEach(options.listeners, function (fn, event) {
-				Hub.on(event, fn);
-			});
+		    for (propName in options.listeners) {
+		        if (typeof options.listeners[propName] === 'function') {
+		            var func = options.listeners[propName].bind(options.listeners);
+		            Hub.on(propName, clientFunctionDecorator(func));
+		        }
+		    }
 		}
 		if (options && options.methods) {
 			angular.forEach(options.methods, function (method) {
