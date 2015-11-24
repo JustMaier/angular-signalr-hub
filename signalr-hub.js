@@ -87,3 +87,8 @@ angular.module('SignalR', [])
 		return Hub;
 	};
 }]);
+
+// Common.js package manager support (e.g. ComponentJS, WebPack)
+if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports) {
+  module.exports = 'leonardo';
+}
