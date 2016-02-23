@@ -111,10 +111,19 @@ angular.module('app',['SignalR'])
 * `errorHandler` function(error) to handle hub connection errors
 * `logging` enable/disable logging
 * `useSharedConnection` use a shared global connection or create a new one just for this hub, defaults to `true`
-* `transport` sets transport method (e.g ```'longPolling'``` or ```['webSockets', 'longPolling']```)
-* **DEPRECATED** `hubDisconnected` function() to handle hub connection disconnected event
-* `stateChanged` function() to handle hub connection state changed event
-* `jsonp` true for Cross - domain Hub
+* `transport` sets transport method (e.g `'longPolling'` or `['webSockets', 'longPolling']`)
+* `jsonp` toggle JSONP for cross-domain support on older browsers or when you can't setup CORS
+* `stateChanged` function() to handle hub connection state changed event `{0: 'connecting', 1: 'connected', 2: 'reconnecting', 4: 'disconnected'}`
+
+**Note** `hubDisconnected` has been removed, instead use the following:
+```
+'stateChanged': function(state){
+	var stateNames = {0: 'connecting', 1: 'connected', 2: 'reconnecting', 4: 'disconnected'};
+	if(stateNames[state.newState] == 'disconnected'){
+		//Hub Disconnect logic here...
+	}
+}
+```
 
 ##Demo
 

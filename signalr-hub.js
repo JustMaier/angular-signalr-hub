@@ -45,10 +45,9 @@ angular.module('SignalR', [])
 			Hub.connection.stop();
 		};
 		Hub.connect = function () {
-			//return Hub.connection.start(options.transport ? { transport: options.transport } : null);
 			var startOptions = {};
-			options.transport ? startOptions.transport = options.transport : null
-			options.jsonp ? startOptions.jsonp = options.jsonp : null
+			if(options.transport) startOptions.transport = options.transport;
+			if(options.jsonp) startOptions.jsonp = options.jsonp;
 			return Hub.connection.start(startOptions);
 		};
 
@@ -74,13 +73,6 @@ angular.module('SignalR', [])
 		}
 		if (options && options.errorHandler) {
 			Hub.connection.error(options.errorHandler);
-		}
-        //DEPRECATED
-		//Allow for the user of the hub to easily implement actions upon disconnected.
-		//e.g. : Laptop/PC sleep and reopen, one might want to automatically reconnect 
-		//by using the disconnected event on the connection as the starting point.
-		if (options && options.hubDisconnected) {
-		    Hub.connection.disconnected(options.hubDisconnected);
 		}
 		if (options && options.stateChanged) {
 		    Hub.connection.stateChanged(options.stateChanged);
