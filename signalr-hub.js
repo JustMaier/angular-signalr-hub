@@ -45,7 +45,11 @@ angular.module('SignalR', [])
 			Hub.connection.stop();
 		};
 		Hub.connect = function () {
-			return Hub.connection.start(options.transport ? { transport: options.transport } : null);
+			//return Hub.connection.start(options.transport ? { transport: options.transport } : null);
+			var startOptions = {};
+			options.transport ? startOptions.transport = options.transport : null
+			options.jsonp ? startOptions.jsonp = options.jsonp : null
+			return Hub.connection.start(startOptions);
 		};
 
 		if (options && options.listeners) {
