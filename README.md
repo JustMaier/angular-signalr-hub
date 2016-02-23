@@ -114,6 +114,7 @@ angular.module('app',['SignalR'])
 * `transport` sets transport method (e.g ```'longPolling'``` or ```['webSockets', 'longPolling']```)
 * **DEPRECATED** `hubDisconnected` function() to handle hub connection disconnected event
 * `stateChanged` function() to handle hub connection state changed event
+* `jsonp` true for Cross - domain Hub
 
 ##Demo
 
