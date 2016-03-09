@@ -114,6 +114,7 @@ angular.module('app',['SignalR'])
 * `transport` sets transport method (e.g `'longPolling'` or `['webSockets', 'longPolling']`)
 * `jsonp` toggle JSONP for cross-domain support on older browsers or when you can't setup CORS
 * `stateChanged` function() to handle hub connection state changed event `{0: 'connecting', 1: 'connected', 2: 'reconnecting', 4: 'disconnected'}`
+* `autoConnect` prevents from connecting automatically. useful for authenticating and then connecting.
 
 **Note** `hubDisconnected` has been removed, instead use the following:
 ```
