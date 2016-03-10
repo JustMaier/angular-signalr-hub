@@ -44,10 +44,11 @@ angular.module('SignalR', [])
 		Hub.disconnect = function () {
 			Hub.connection.stop();
 		};
-		Hub.connect = function () {
+		Hub.connect = function (queryParams) {
 			var startOptions = {};
 			if(options.transport) startOptions.transport = options.transport;
 			if(options.jsonp) startOptions.jsonp = options.jsonp;
+            if (queryParams) Hub.connection.qs = queryParams;
 			return Hub.connection.start(startOptions);
 		};
 
