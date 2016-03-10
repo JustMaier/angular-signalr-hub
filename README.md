@@ -104,7 +104,8 @@ angular.module('app',['SignalR'])
 ```
 ##Options
 
-* `listeners` client side callbacks
+* `listeners` client side callbacks*
+* `withCredentials` whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates, defaults to `true`
 * `methods`  a string array of server side methods which the client can call
 * `rootPath` sets the root path for the signalR web service
 * `queryParams` object representing additional query params to be sent on connection
