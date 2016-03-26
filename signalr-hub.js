@@ -46,8 +46,9 @@ angular.module('SignalR', [])
 		};
 		Hub.connect = function () {
 			var startOptions = {};
-			if(options.transport) startOptions.transport = options.transport;
-			if(options.jsonp) startOptions.jsonp = options.jsonp;
+			if (options.transport) startOptions.transport = options.transport;
+			if (options.jsonp) startOptions.jsonp = options.jsonp;
+			if (angular.isDefined(options.withCredentials)) startOptions.withCredentials = options.withCredentials;
 			return Hub.connection.start(startOptions);
 		};
 
