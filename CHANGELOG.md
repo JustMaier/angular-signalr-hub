@@ -1,5 +1,9 @@
 #Changelog
 
+##1.6.2 - Apr 19, 2016
+
+- Added `queryParams` to connect method [#70](https://github.com/JustMaier/angular-signalr-hub/pull/70) *Thanks @tribicito*
+
 ##1.6.1 - Mar 26, 2016
 
 - Added `withCredentials` option [#68](https://github.com/JustMaier/angular-signalr-hub/pull/68) *Thanks @redwyre*
