@@ -157,7 +157,7 @@ Modifications were made to the following files:
 In the app folder for the angular app, there is a ChatService which uses the angular-signalr-hub.
 The hub in this case is the ChatHub in this project.
 
-Download the full sample [here](http://1drv.ms/1K3EXpQ).
+Download the full sample [here](https://onedrive.live.com/redir?resid=A384F349DF30AC50!34027&authkey=!ABcHiikiie50aCM&ithint=file%2czip).
 
 The sample is provided as is. 
 There are soms issues with the way it is set up, but it does the trick in showing in showing how to use the angular-signalr-hub in an easy to reproduce app.
