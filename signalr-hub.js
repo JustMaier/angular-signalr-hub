@@ -55,8 +55,13 @@ angular.module('SignalR', [])
 		Hub.disconnect = function () {
 			Hub.connection.stop();
 		};
-		Hub.connect = function () {
-			return Hub.connection.start(options.transport ? { transport: options.transport } : null);
+		Hub.connect = function (queryParams) {
+			var startOptions = {};
+			if (options.transport) startOptions.transport = options.transport;
+			if (options.jsonp) startOptions.jsonp = options.jsonp;
+			if (angular.isDefined(options.withCredentials)) startOptions.withCredentials = options.withCredentials;
+			if(queryParams) Hub.connection.qs = queryParams;
+			return Hub.connection.start(startOptions);
 		};
 
 		if (options && options.listeners) {
@@ -67,6 +72,7 @@ angular.module('SignalR', [])
 		        }
 		    }
 		}
+
 		if (options && options.methods) {
 			angular.forEach(options.methods, function (method) {
 				Hub[method] = function () {
@@ -82,19 +88,20 @@ angular.module('SignalR', [])
 		if (options && options.errorHandler) {
 			Hub.connection.error(options.errorHandler);
 		}
-        //DEPRECATED
-		//Allow for the user of the hub to easily implement actions upon disconnected.
-		//e.g. : Laptop/PC sleep and reopen, one might want to automatically reconnect 
-		//by using the disconnected event on the connection as the starting point.
-		if (options && options.hubDisconnected) {
-		    Hub.connection.disconnected(options.hubDisconnected);
-		}
 		if (options && options.stateChanged) {
 		    Hub.connection.stateChanged(options.stateChanged);
 		}
 
 		//Adding additional property of promise allows to access it in rest of the application.
-		Hub.promise = Hub.connect();
+		if(options.autoConnect === undefined || options.autoConnect){
+			Hub.promise = Hub.connect();	
+		}
+		
 		return Hub;
 	};
 }]);
+
+// Common.js package manager support (e.g. ComponentJS, WebPack)
+if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports) {
+  module.exports = 'SignalR';
+}

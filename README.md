@@ -1,6 +1,9 @@
 angular-signalr-hub
 =======================
-[![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard.svg)](http://definitelytyped.org)
+![Bower version][bower-image]
+[![Nuget version][nuget-image]][nuget-url]
+[![NPM version][npm-image]][npm-url]
+[![TypeScript definitions on DefinitelyTyped][typescript-image]][typescript-url]
 
 A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions, and methods that you're going to use.
 
@@ -101,16 +104,28 @@ angular.module('app',['SignalR'])
 ```
 ##Options
 
-* `listeners` client side callbacks
+* `listeners` client side callbacks*
+* `withCredentials` whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates, defaults to `true`
 * `methods`  a string array of server side methods which the client can call
 * `rootPath` sets the root path for the signalR web service
-* `queryParams` object representing additional query params to be sent on connection
+* `queryParams` object representing additional query params to be sent on connection, can also be specified in the connect method
 * `errorHandler` function(error) to handle hub connection errors
 * `logging` enable/disable logging
 * `useSharedConnection` use a shared global connection or create a new one just for this hub, defaults to `true`
-* `transport` sets transport method (e.g ```'longPolling'``` or ```['webSockets', 'longPolling']```)
-* **DEPRECATED** `hubDisconnected` function() to handle hub connection disconnected event
-* `stateChanged` function() to handle hub connection state changed event
+* `transport` sets transport method (e.g `'longPolling'` or `['webSockets', 'longPolling']`)
+* `jsonp` toggle JSONP for cross-domain support on older browsers or when you can't setup CORS
+* `stateChanged` function() to handle hub connection state changed event `{0: 'connecting', 1: 'connected', 2: 'reconnecting', 4: 'disconnected'}`
+* `autoConnect` prevents from connecting automatically. useful for authenticating and then connecting.
+
+**Note** `hubDisconnected` has been removed, instead use the following:
+```
+'stateChanged': function(state){
+	var stateNames = {0: 'connecting', 1: 'connected', 2: 'reconnecting', 4: 'disconnected'};
+	if(stateNames[state.newState] == 'disconnected'){
+		//Hub Disconnect logic here...
+	}
+}
+```
 
 ##Demo
 
@@ -142,7 +157,7 @@ Modifications were made to the following files:
 In the app folder for the angular app, there is a ChatService which uses the angular-signalr-hub.
 The hub in this case is the ChatHub in this project.
 
-Download the full sample [here](http://1drv.ms/1K3EXpQ).
+Download the full sample [here](https://onedrive.live.com/redir?resid=A384F349DF30AC50!34027&authkey=!ABcHiikiie50aCM&ithint=file%2czip).
 
 The sample is provided as is. 
 There are soms issues with the way it is set up, but it does the trick in showing in showing how to use the angular-signalr-hub in an easy to reproduce app.
@@ -151,3 +166,12 @@ There are soms issues with the way it is set up, but it does the trick in showin
 
 * I would recommend creating a factory or service around the Hub so that you have an easy to use "model handler" that can include SignalR and Web API calls and be easily pulled into any controller
 * For an example of Web API, SignalR, and Angular working together check out this [small demo](https://github.com/JustMaier/signalrgrid) I adapted from [turanuk's SignalR demo with Knockout](https://github.com/turanuk/signalrgrid)
+
+
+[npm-image]: https://img.shields.io/npm/v/angular-signalr-hub.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/angular-signalr-hub
+[bower-image]: https://img.shields.io/bower/v/angular-signalr-hub.svg?style=flat-square
+[nuget-image]: https://img.shields.io/nuget/v/AngularJs.SignalR.Hub.svg?style=flat-square
+[nuget-url]: https://www.nuget.org/packages/AngularJs.SignalR.Hub/
+[typescript-image]: http://definitelytyped.org/badges/standard-flat.svg
+[typescript-url]: http://definitelytyped.org
