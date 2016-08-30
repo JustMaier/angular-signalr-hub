@@ -48,6 +48,8 @@ angular.module('SignalR', [])
 			var startOptions = {};
 			if (options.transport) startOptions.transport = options.transport;
 			if (options.jsonp) startOptions.jsonp = options.jsonp;
+			if (options.pingInterval !== undefined) startOptions.pingInterval = options.pingInterval;
+			
 			if (angular.isDefined(options.withCredentials)) startOptions.withCredentials = options.withCredentials;
 			if(queryParams) Hub.connection.qs = queryParams;
 			return Hub.connection.start(startOptions);
