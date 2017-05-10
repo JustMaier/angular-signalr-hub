@@ -68,7 +68,13 @@ angular.module('SignalR', [])
 				Hub[method] = function () {
 					var args = $.makeArray(arguments);
 					args.unshift(method);
-					return Hub.invoke.apply(Hub, args);
+					if (Hub.connection.state !== 1) {
+					    Hub.connection.start().then(function () {
+				                return Hub.invoke.apply(Hub, args);
+				            });
+				        } else {
+				            return Hub.invoke.apply(Hub, args);
+				        }
 				};
 			});
 		}
