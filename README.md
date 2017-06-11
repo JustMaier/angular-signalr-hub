@@ -7,22 +7,22 @@ angular-signalr-hub
 
 A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions, and methods that you're going to use.
 
-##Installation
+## Installation
 
-####Bower
+#### Bower
 `bower install angular-signalr-hub`
 
-####Nuget
+#### Nuget
 `install-package AngularJs.SignalR.Hub`
 
-####NPM
+#### NPM
 `npm install angular-signalr-hub`
 
-####Manually
+#### Manually
 
 `<script type="text/javascript" src="js/signalr-hub.js"></script>`
 
-##Usage
+## Usage
 
 1. Include the `signalr-hub.js` script provided by this component into your app
 2. add `SignalR` as a module dependency to your app
@@ -32,7 +32,7 @@ A handy wrapper for SignalR Hubs. Just specify the hub name, listening functions
 var hub = new Hub('hubname',options);
 ```
 
-####Javascript
+#### Javascript
 
 ```javascript
 angular.module('app',['SignalR'])
@@ -102,7 +102,7 @@ angular.module('app',['SignalR'])
 	};
 }]);
 ```
-##Options
+## Options
 
 * `listeners` client side callbacks*
 * `withCredentials` whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates, defaults to `true`
@@ -127,13 +127,13 @@ angular.module('app',['SignalR'])
 }
 ```
 
-##Demo
+## Demo
 
 [A simple demo using OData, Signalr, and Angular](https://github.com/JustMaier/signalrgrid)
 
 It's an adaption of [turanuk's great SignalR demo with Knockout](https://github.com/turanuk/signalrgrid).
 
-##Simple Chat Demo
+## Simple Chat Demo
 
 This sample starts off with the [MVC-SignalR chat](http://www.asp.net/signalr/overview/getting-started/tutorial-getting-started-with-signalr-and-mvc) sample by Tim Teebken and Patrick Fletcher.
 
@@ -157,12 +157,26 @@ Modifications were made to the following files:
 In the app folder for the angular app, there is a ChatService which uses the angular-signalr-hub.
 The hub in this case is the ChatHub in this project.
 
-Download the full sample [here](http://1drv.ms/1K3EXpQ).
+Download the full sample [here](https://onedrive.live.com/redir?resid=A384F349DF30AC50!34027&authkey=!ABcHiikiie50aCM&ithint=file%2czip).
 
 The sample is provided as is. 
 There are soms issues with the way it is set up, but it does the trick in showing in showing how to use the angular-signalr-hub in an easy to reproduce app.
 
-##Notes
+## Multiple hubs
+
+There is something you have to take care about when using multiple hubs in an angular app : 
+
+Angular services are singletons, so they won't be instantiated before you need it. 
+
+If you use shared connection between your hubs (`useSharedConnection`), and if you have two services containing hubs, you can have a problem :
+
+The first service loaded will start the connection. Then when the second service will load, its hub won't be registered to the server SignalR (`OnConnected` method) if this service is instantiated after that the shared connection is `connected`. 
+(SignalR trace : SignalR: Client subscribed to hub 'hubname'.)
+The hub of the second service will be able to invoke server methods, but the server won't be able to invoke the client methods for this hub.
+
+To avoid that, you can put `useSharedConnection` to `false`.
+
+## Notes
 
 * I would recommend creating a factory or service around the Hub so that you have an easy to use "model handler" that can include SignalR and Web API calls and be easily pulled into any controller
 * For an example of Web API, SignalR, and Angular working together check out this [small demo](https://github.com/JustMaier/signalrgrid) I adapted from [turanuk's SignalR demo with Knockout](https://github.com/turanuk/signalrgrid)
